@@ -15,7 +15,10 @@
 -- ============================================================
 
 -- Write your query below:
-
+select staff_id, first_name, last_name, email
+from sales.staffs
+where store_id= 1
+and active= 1;
 
 
 
@@ -29,7 +32,9 @@
 
 -- Write your query below:
 
-
+select product_id, product_name, category_id, list_price
+from production.products
+order by category_id ASC, list_price DESC;
 
 
 -- ============================================================
@@ -43,11 +48,16 @@
 -- ============================================================
 
 -- Part a:
+select top 3 order_id, customer_id, order_date
+from sales.orders
+order by order_id DESC
 
 
 -- Part b:
+select top 10 percent list_price
+from production.products
 
-
+/* 33 rows return */
 
 
 -- ============================================================
@@ -59,7 +69,11 @@
 
 -- Write your query below:
 
-
+select last_name
+from sales.customers
+order by last_name
+offset 10 rows
+fetch next 10 rows only;
 
 
 -- ============================================================
@@ -73,10 +87,13 @@
 -- ============================================================
 
 -- Part a:
-
+select distinct brand_id
+from production.products
+where list_price > 1000
 
 -- Part b:
-
+select distinct category_id, model_year
+from production.products
 
 
 
@@ -90,9 +107,14 @@
 -- ============================================================
 
 -- Part a:
-
+select order_id, store_id, order_date
+from sales.orders
+where store_id in (1,3)
 
 -- Part b:
+select order_id, store_id, order_date
+from sales.orders
+where store_id not in (2)
 
 
 
@@ -108,7 +130,11 @@
 -- ============================================================
 
 -- Write your query below:
-
+select product_name, model_year, list_price
+from production.products
+where (list_price between 300 and 1200)
+and (model_year = 2017 or model_year= 2018)
+order by list_price ASC
 
 
 
@@ -122,10 +148,14 @@
 -- ============================================================
 
 -- Part a:
-
+select staff_id, first_name, last_name
+from sales.staffs
+where manager_id is null;
 
 -- Part b:
-
+select staff_id, first_name, last_name
+from sales.staffs
+where manager_id is not null;
 
 
 
@@ -139,7 +169,10 @@
 -- ============================================================
 
 -- Write your query below:
-
+select first_name + last_name as full_name, email
+from sales.customers
+where email like '%gmail.com'
+order by full_name
 
 
 
